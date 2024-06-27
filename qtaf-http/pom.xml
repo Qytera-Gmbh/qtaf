@@ -16,7 +16,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <!-- Dependency versions -->
         <jakartaActivationVersion>2.1.2</jakartaActivationVersion>
-        <jerseyClientVersion>3.1.6</jerseyClientVersion>
+        <jerseyClientVersion>3.1.7</jerseyClientVersion>
         <jerseyMediaMultipartVersion>3.1.5</jerseyMediaMultipartVersion>
     </properties>
 
