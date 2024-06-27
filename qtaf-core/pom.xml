@@ -52,7 +52,7 @@
         <rxJavaVersion>1.3.8</rxJavaVersion>
         <seleneideVersion>7.2.3</seleneideVersion>
         <seleniumJavaVersion>4.20.0</seleniumJavaVersion>
-        <slf4jVersion>2.0.11</slf4jVersion>
+        <slf4jVersion>2.0.13</slf4jVersion>
         <testNGCucumberVersion>7.14.0</testNGCucumberVersion>
         <testNGVersion>7.8.0</testNGVersion>
         <webDriverManagerVersion>5.8.0</webDriverManagerVersion>
