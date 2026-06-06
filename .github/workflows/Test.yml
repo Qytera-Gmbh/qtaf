@@ -26,6 +26,10 @@ jobs:
   test:
     needs: [check-secrets]
     strategy:
+      # Don't cancel ubuntu when windows fails (WebDriverManager+Chrome149 issue,
+      # tracked in docs/adr/ADR-0001). Windows is info-only, not in required
+      # status checks. Ubuntu must report its own result for the merge gate.
+      fail-fast: false
       matrix:
         os: ["windows-latest", "ubuntu-latest"]
         include:
