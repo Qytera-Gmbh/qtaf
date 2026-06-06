@@ -61,6 +61,11 @@ jobs:
               -DexcludedGroups=ie,edge,chrome,driver
 
     runs-on: ${{ matrix.os }}
+    # Windows is info-only until Selenium Manager migration (ADR-0001):
+    # WebDriverManager 5.8.0 cannot resolve ChromeDriver for Chrome 149+.
+    # continue-on-error means a windows failure does NOT mark the test job as failed,
+    # so downstream jobs (Publish.yml's publish step) can proceed when ubuntu is green.
+    continue-on-error: ${{ matrix.os == 'windows-latest' }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
