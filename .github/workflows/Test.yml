@@ -19,11 +19,9 @@ jobs:
           names: |
             XRAY_CLIENT_ID
             XRAY_CLIENT_SECRET
-            SONAR_TOKEN
         env:
           XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
           XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   test:
     needs: [check-secrets]
@@ -36,11 +34,7 @@ jobs:
             # WebDriverManager 5.8.0 still resolves the dead host and crashes the test JVM.
             # IE tests excluded for consistency (driver no longer maintained since 2022).
             command: |
-              mvn --batch-mode --no-transfer-progress clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar `
-              "-Dsonar.host.url=https://sonarcloud.io" `
-              "-Dsonar.organization=qytera-gmbh" `
-              "-Dsonar.projectKey=Qytera-Gmbh_QTAF" `
-              "-Dsonar.login=$Env:SONAR_TOKEN" `
+              mvn --batch-mode --no-transfer-progress clean verify `
               "-Dxray.authentication.xray.clientId=$Env:XRAY_CLIENT_ID" `
               "-Dxray.authentication.xray.clientSecret=$Env:XRAY_CLIENT_SECRET" `
               "-DexcludedGroups=ie,edge"
@@ -50,11 +44,7 @@ jobs:
             command: |
               export DISPLAY=:99
               sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
-              mvn --batch-mode --no-transfer-progress clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-              -Dsonar.host.url=https://sonarcloud.io \
-              -Dsonar.organization=qytera-gmbh \
-              -Dsonar.projectKey=Qytera-Gmbh_QTAF \
-              -Dsonar.login=$SONAR_TOKEN \
+              mvn --batch-mode --no-transfer-progress clean verify \
               -Dxray.authentication.xray.clientId=$XRAY_CLIENT_ID \
               -Dxray.authentication.xray.clientSecret=$XRAY_CLIENT_SECRET \
               -DexcludedGroups=ie,edge
@@ -78,4 +68,3 @@ jobs:
         env:
           XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
           XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
