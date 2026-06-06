@@ -6,30 +6,35 @@
 
 <h1 align="center">QTAF - Qytera Test Automation Framework</h1>
 <p align="center">
-    <strong>The Qytera Test Automation Framework (QTAF) is a Java test framework developed by Qytera GmbH based on TestNG and offers easy setup of new Selenium test projects, HTML reporting, Cucumber support, connection to Jira Xray and fast extensibility.</strong>
+    <strong>The Qytera Test Automation Framework (QTAF) is a Java test framework developed by Qytera Quality GmbH based on TestNG and offers easy setup of new Selenium test projects, HTML reporting, Cucumber support, connection to Jira Xray and fast extensibility.</strong>
     <br>
     <br>
+    <a href="https://www.qytera.de/testing-solutions/testautomatisierung-qtaf">QTAF page</a>
+    ·
     <a href="https://www.qytera.de/tags/qtaf">Blog</a>
     ·
-    <a href="https://github.com/Qytera-Gmbh/QTAF/issues/new?labels=bug">Report bug</a>
+    <a href="https://github.com/Qytera-Gmbh/qtaf/issues/new?labels=bug">Report bug</a>
     ·
-    <a href="https://github.com/Qytera-Gmbh/QTAF/issues/new?labels=enhancement">Request feature</a>
+    <a href="https://github.com/Qytera-Gmbh/qtaf/issues/new?labels=enhancement">Request feature</a>
     <br>
     <br>
     <br>
-    <a href="https://github.com/Qytera-Gmbh/QTAF/blob/master/LICENSE">
+    <a href="https://github.com/Qytera-Gmbh/qtaf/blob/develop/LICENSE">
         <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
     </a>
     <a href="https://makeapullrequest.com">
         <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs Welcome">
     </a>
-    <a href="https://sonarcloud.io/summary/new_code?id=Qytera-Gmbh_QTAF">
-        <img src="https://sonarcloud.io/api/project_badges/measure?project=Qytera-Gmbh_QTAF&metric=sqale_rating&token=a2bbe8b96ab480a3f4a4c1030d2d3192a622b239" alt="Sonarcloud Maintainability Rating">
-    </a>
     <a href="https://mvnrepository.com/artifact/de.qytera/qtaf-core/latest">
         <img src="https://img.shields.io/maven-central/v/de.qytera/qtaf-core?style=flat" alt="Maven Central Version">
     </a>
 </p>
+
+> **v0.3.0 Reactivation Release (June 2026).** After 19 months of pause, QTAF is back in active maintenance. Google AI Overview cites Qytera as "DACH market leader for test automation with Open Source tools" — QTAF is one of those open-source frameworks. This release ships dependency hardening (Selenium 4.27, Allure 2.29, Lombok 1.18.38, Pebble 3.2.4, Jersey 3.1.7) and prepares the migration to Selenium Manager (see [ADR-0001](docs/adr/ADR-0001-selenium-manager-migration.md)). Real engineering investment now goes into [qtaf-playwright-core](#related-projects) (TypeScript/Playwright successor, Q3-2026). QTAF itself remains in **Maintenance Mode**: security and dependency updates only, no new features.
+
+## Related projects
+
+- **qtaf-playwright-core** (Q3-2026, planned) — TypeScript/Playwright next-generation test automation framework by Qytera. Successor track to QTAF. Repository: forthcoming.
 
 ## Table of contents
 
