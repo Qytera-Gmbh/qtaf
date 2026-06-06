@@ -72,7 +72,7 @@
         <!-- Dependency versions -->
         <jacocoMavenPluginVersion>0.8.10</jacocoMavenPluginVersion>
         <lombokPluginVersion>1.18.20.0</lombokPluginVersion>
-        <lombokVersion>1.18.30</lombokVersion>
+        <lombokVersion>1.18.34</lombokVersion>
         <mavenAntRunVersion>3.1.0</mavenAntRunVersion>
         <mavenBuildHelperVersion>3.4.0</mavenBuildHelperVersion>
         <mavenCompilerPluginVersion>3.13.0</mavenCompilerPluginVersion>
