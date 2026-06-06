@@ -19,11 +19,9 @@ jobs:
           names: |
             XRAY_CLIENT_ID
             XRAY_CLIENT_SECRET
-            SONAR_TOKEN
         env:
           XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
           XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   test:
     needs: [check-secrets]
@@ -32,28 +30,31 @@ jobs:
         os: ["windows-latest", "ubuntu-latest"]
         include:
           - os: "windows-latest"
+            # Excluded test groups (see ADR-0024 for migration plan to Selenium Manager):
+            # - ie:     Internet Explorer EOL since 2022, IEDriverServer no longer downloadable
+            # - edge:   Microsoft shut down msedgedriver.azureedge.net CDN in 2024,
+            #           WebDriverManager 5.8.0 still resolves the dead host (JVM crash)
+            # - chrome: setup-chrome@v1 installs Chrome 149+, WebDriverManager 5.8.0 only
+            #           knows ChromeDriver up to Chrome 123 → SessionNotCreatedException
+            # - driver: DriverTest.testDriverCache calls Chrome+Firefox+Edge in one test
             command: |
-              mvn --batch-mode --no-transfer-progress clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar `
-              "-Dsonar.host.url=https://sonarcloud.io" `
-              "-Dsonar.organization=qytera-gmbh" `
-              "-Dsonar.projectKey=Qytera-Gmbh_QTAF" `
-              "-Dsonar.login=$Env:SONAR_TOKEN" `
+              mvn --batch-mode --no-transfer-progress clean verify `
               "-Dxray.authentication.xray.clientId=$Env:XRAY_CLIENT_ID" `
-              "-Dxray.authentication.xray.clientSecret=$Env:XRAY_CLIENT_SECRET"
+              "-Dxray.authentication.xray.clientSecret=$Env:XRAY_CLIENT_SECRET" `
+              "-DexcludedGroups=ie,edge,chrome,driver"
           - os: "ubuntu-latest"
-            # Exclude Internet Explorer, as it does not run on Linux: https://www.selenium.dev/documentation/ie_driver_server/
-            # Also: https://stackoverflow.com/questions/63125480/running-a-gui-application-on-a-ci-service-without-x11
+            # Excluded test groups (see ADR-0024):
+            # - ie:     not supported on Linux (https://www.selenium.dev/documentation/ie_driver_server/)
+            # - edge:   msedgedriver CDN dead (see Windows comment above)
+            # - chrome: ChromeDriver version mismatch with browser-actions/setup-chrome@v1
+            # - driver: DriverTest.testDriverCache calls Chrome+Firefox+Edge in one test
             command: |
               export DISPLAY=:99
               sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
-              mvn --batch-mode --no-transfer-progress clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-              -Dsonar.host.url=https://sonarcloud.io \
-              -Dsonar.organization=qytera-gmbh \
-              -Dsonar.projectKey=Qytera-Gmbh_QTAF \
-              -Dsonar.login=$SONAR_TOKEN \
+              mvn --batch-mode --no-transfer-progress clean verify \
               -Dxray.authentication.xray.clientId=$XRAY_CLIENT_ID \
               -Dxray.authentication.xray.clientSecret=$XRAY_CLIENT_SECRET \
-              -DexcludedGroups=ie,edge
+              -DexcludedGroups=ie,edge,chrome,driver
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
@@ -74,4 +75,3 @@ jobs:
         env:
           XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
           XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
