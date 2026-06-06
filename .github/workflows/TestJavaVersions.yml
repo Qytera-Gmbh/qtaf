@@ -16,8 +16,10 @@ jobs:
   test-java-versions:
     strategy:
       matrix:
-        # latest LTS version and latest non-LTS version
-        JAVA_VERSION: ["17", "19"]
+        # Java 17 LTS only. Java 19 was non-LTS and reached EOL — dropped 2026-06
+        # to align with Maintenance-Mode reactivation. Re-add Java 21 LTS as
+        # follow-up once Lombok 1.18.34+ is in (PR#337).
+        JAVA_VERSION: ["17"]
         JAVA_DISTRIBUTION: [zulu]
     uses: ./.github/workflows/Test.yml
     with:
