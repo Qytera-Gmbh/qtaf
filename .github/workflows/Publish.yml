@@ -4,6 +4,10 @@ name: Publish Maven Central
 on:
   release:
     types: ["published"]
+  # Allow manual re-run after CI/CD fixes (e.g. when a release was published
+  # but Publish failed in a vorgelagerten step). Triggered via:
+  #   gh workflow run Publish.yml --ref <branch-or-tag>
+  workflow_dispatch:
 
 env:
   JAVA_VERSION: "17"
