@@ -32,6 +32,9 @@ jobs:
         os: ["windows-latest", "ubuntu-latest"]
         include:
           - os: "windows-latest"
+            # Exclude Edge tests: Microsoft shut down the msedgedriver.azureedge.net CDN in 2024,
+            # WebDriverManager 5.8.0 still resolves the dead host and crashes the test JVM.
+            # IE tests excluded for consistency (driver no longer maintained since 2022).
             command: |
               mvn --batch-mode --no-transfer-progress clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar `
               "-Dsonar.host.url=https://sonarcloud.io" `
@@ -39,7 +42,8 @@ jobs:
               "-Dsonar.projectKey=Qytera-Gmbh_QTAF" `
               "-Dsonar.login=$Env:SONAR_TOKEN" `
               "-Dxray.authentication.xray.clientId=$Env:XRAY_CLIENT_ID" `
-              "-Dxray.authentication.xray.clientSecret=$Env:XRAY_CLIENT_SECRET"
+              "-Dxray.authentication.xray.clientSecret=$Env:XRAY_CLIENT_SECRET" `
+              "-DexcludedGroups=ie,edge"
           - os: "ubuntu-latest"
             # Exclude Internet Explorer, as it does not run on Linux: https://www.selenium.dev/documentation/ie_driver_server/
             # Also: https://stackoverflow.com/questions/63125480/running-a-gui-application-on-a-ci-service-without-x11
