@@ -82,7 +82,7 @@
         <mavenSourcePluginVersion>3.3.0</mavenSourcePluginVersion>
         <mavenSurefirePluginVersion>3.2.3</mavenSurefirePluginVersion>
         <nexusStagingMavenPluginVersion>1.6.13</nexusStagingMavenPluginVersion>
-        <sonarMavenPluginVersion>3.10.0.2594</sonarMavenPluginVersion>
+        <sonarMavenPluginVersion>5.7.0.6970</sonarMavenPluginVersion>
     </properties>
 
     <profiles>
