@@ -81,7 +81,7 @@
         <mavenJavadocPluginVersion>3.5.0</mavenJavadocPluginVersion>
         <mavenSourcePluginVersion>3.3.0</mavenSourcePluginVersion>
         <mavenSurefirePluginVersion>3.2.3</mavenSurefirePluginVersion>
-        <nexusStagingMavenPluginVersion>1.6.13</nexusStagingMavenPluginVersion>
+        <nexusStagingMavenPluginVersion>1.7.0</nexusStagingMavenPluginVersion>
         <sonarMavenPluginVersion>3.10.0.2594</sonarMavenPluginVersion>
     </properties>
 
